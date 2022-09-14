@@ -1,0 +1,72 @@
+.app-header {
+    display: flex;
+    background-color: #ffffff;
+    height: 60px;
+    position: sticky;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    top: 0;
+
+    a {
+        text-decoration: none;
+        color: #212123;
+    }
+}
+
+.header-logo {
+    margin-top: 10px;
+    margin-left: 100px;
+    width: 10px;
+}
+
+.header-search {
+    margin: auto;
+
+    input {
+        background-color: #EFEFEF;
+        // background: url('/src/assets/icons/search') no-repeat scroll 7px 7px;
+        padding-left: 30px;
+        color: #9196A1;
+        height: 36px;
+        width: 268px;
+        border: none;
+        border-radius: 8px;
+    }
+
+}
+
+.header-nav {
+    display: flex;
+    gap: 25px;
+    margin-top: 15px;
+    margin-right: 100px;
+
+    img {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+}
+
+.user-img {
+    img {
+        border-radius: 50%;
+        border: 1px solid #C6C6C6;
+    }
+}
+
+.user-drop {
+    position: relative;
+    border-radius: 5px;
+    right: 250px;
+    top: 60px;
+    width: 150px;
+    height: 150px;
+    background-color: rgb(255,255,255);
+}
+
+.user-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

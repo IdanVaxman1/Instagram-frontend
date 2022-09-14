@@ -1,0 +1,32 @@
+.more-botton {
+
+    margin-left:250px;
+    margin-top: 10px;
+
+    img {
+        width: 30px;
+        height: 25px;
+    }
+}
+
+
+
+.modal-buttons {
+    button {
+        width: 100%;
+        color:rgb(88,88,88);
+        font-size:14px;
+        background-color: #ffff;
+        border: none;
+        padding: 15px;
+        border-bottom: 1px solid #ededed;
+        cursor: pointer;
+    }
+}
+
+.modal-user-buttons {
+    button {
+        color:rgb(237,73,86);
+        font-weight: 700;
+    }
+}
