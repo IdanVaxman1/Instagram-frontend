@@ -29,11 +29,11 @@ export function loadPosts() {
 export function addPost(newPost) {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post('/add' , {newPost});
+            const { data } = await axios.post('/add' , newPost);
             console.log('newpost:' , newPost);
             dispatch({
                 type: 'ADD_POST',
-                data
+                newPost
             })
         } catch (err) {
             console.log('cannot upload post :::', err);

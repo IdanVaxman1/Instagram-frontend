@@ -30,7 +30,7 @@ export const PostPreview = ({ post }) => {
                 <PostModal post={post} />
             </div>
             <div className="post-img">
-                <img src={post.imgUrl} alt="" />
+                <img src={post.selectedImg} alt="" />
             </div>
             <div className='post-icons'>
                 <img src={heart} alt="" />

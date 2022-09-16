@@ -78,13 +78,11 @@ function getEmptyPost() {
         // _id: _makeId()
 
         txt : 'String',
-        creator: 'Tom Cohen',
-        imgUrl: 'https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg',
-        createdAt: new Date(),
-        by: {
-                fullname: "Tom Cohen",
-                imgUrl: "https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg"
-            }
+        by : {
+            fullname:'Idan vaxman',
+            imgUrl: 'https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg'
+        },
+        selectedImg: 'https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg',
     }
 }
 
