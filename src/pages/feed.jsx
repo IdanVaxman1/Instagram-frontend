@@ -11,8 +11,10 @@ export const Feed = () => {
 
     const posts = useSelector((state) => state.postModule.posts)
     const dispatch = useDispatch()
+    const [user , setUser] = useState()
 
     useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')))
         dispatch(loadPosts())
         console.log('from back : ',posts);
     }, [])
@@ -22,7 +24,7 @@ export const Feed = () => {
     if (!Array.isArray(posts) || !posts.length) return <div className='loading'><img src={loading} alt="" /></div>
     
 
-
+    
     return (
         <section>
             <FeedStory />

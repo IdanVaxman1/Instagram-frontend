@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FileBase64 from 'react-file-base64';
 import Modal from 'react-modal';
 import addIcon from '../assets/icons/add.png'
 import leftArrow from '../assets/icons/left-arrow.png'
-import { addPost , editPost , getPost } from '../store/post.actions';
+import { addPost, updatePost, getPost } from '../store/post.actions';
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { postService } from '../services/post-service'
@@ -31,7 +32,7 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('body');
 
-export const AddPost = ({postId ,title , buttonTitle , imgUrl , divTitle}) => {
+export const AddPost = ({ postId, title, buttonTitle, imgUrl, divTitle }) => {
 
     let subtitle;
 
@@ -39,6 +40,7 @@ export const AddPost = ({postId ,title , buttonTitle , imgUrl , divTitle}) => {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [newPost, setNewPost] = useState();
+    const [postImg, setPostImg] = useState();
     const [post, setPost] = useState()
 
     const dispatch = useDispatch()
@@ -75,23 +77,27 @@ export const AddPost = ({postId ,title , buttonTitle , imgUrl , divTitle}) => {
         ev.preventDefault()
         const post = postService.getEmptyPost()
         post.txt = newPost
+        post.selectedImg = postImg
         dispatch(addPost(post))
         console.log(post);
         closeModal()
     }
 
-    
+
 
     const edit = ev => {
         ev.preventDefault()
-        // dispatch(editPost(post))
-        // closeModal()
+        const post = postService.getEmptyPost()
+        post.txt = newPost
+        dispatch(updatePost(postId, post))
+        console.log(post, 'newPost');
+        closeModal()
     }
 
     return (
         <div>
             <div>
-                {(title === 'Edit') ? <span onClick={openModal}>{title}</span> : <img onClick={openModal} src={addIcon} alt="" />}  
+                {(title === 'Edit') ? <span onClick={openModal}>{title}</span> : <img onClick={openModal} src={addIcon} alt="" />}
             </div>
             <Modal
                 isOpen={modalIsOpen}
@@ -104,18 +110,27 @@ export const AddPost = ({postId ,title , buttonTitle , imgUrl , divTitle}) => {
                     <div className='add-post-header'>
                         <img onClick={closeModal} src={leftArrow} alt="" />
                         <span className='add-post-title'>{divTitle}</span>
-                        <span className='add-post-share'>{buttonTitle}</span>
+                        <span onClick={ () => dispatch(updatePost(postId, post))} className='add-post-share'>{buttonTitle}</span>
                     </div>
 
                     <div className='add-post-main'>
-                        <div className='add-post-img'>
-                            <img src={imgUrl} alt="" />
-                        </div>
+
                         <div>
-                            <form onSubmit={(title === 'Edit') ? edit : add }>
+                            <form onSubmit={(title === 'Edit') ? edit : add}>
                                 <textarea onChange={handleChange} name="" id="" cols="30" rows="10"></textarea>
                                 <button >Send</button>
-                            </form>
+                            </form> 
+
+                            {(postImg) ?
+                                <div className='add-post-img'>
+                                    <img src={postImg} alt="" />
+                                </div>
+                                :
+                                <FileBase64
+                                    multiple={false}
+                                    onDone={({ base64 }) => setPostImg(base64)} />
+                            }
+
                         </div>
                     </div>
                 </div>

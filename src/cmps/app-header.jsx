@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AddPost } from './add-post'
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom";
+
 import { Link } from 'react-router-dom'
 import home from '../assets/icons/home.png'
 import messenger from '../assets/icons/messenger.png'
@@ -11,38 +14,57 @@ import me from '../assets/me.jpg'
 export const AppHeader = () => {
 
     const [isActive, setIsActive] = useState(false);
+    const [user, setUser] = useState()
+    const navigate = useNavigate()
 
-    const handleClick = () => {
-        setIsActive(current => !current);
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')))
+    }, [])
 
+
+    const dispatch = useDispatch()
+
+
+    const handleClick = () => { setIsActive(current => !current) }
+
+    const logout = () => {
+        dispatch({ type: 'LOGUOT' })
+        navigate('/login')
     }
 
-    return (
-        <header className="app-header">
-            <Link to='/'>
-                <div className="header-logo">
-                    <h1>Instgram</h1>
-                </div>
-            </Link>
-            <div className="header-search">
-                <input type="text" placeholder="Search" />
-            </div>
-            <div className="header-nav">
-                <Link to='/'><div><img src={home} alt="" /></div></Link>
-                <Link to='/'><div><img src={messenger} alt="" /></div></Link>
-                <AddPost title='Create new post' buttonTitle='Share' imgUrl='https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg' />
-                <Link to='/'><div><img src={heart} alt="" /></div></Link>
-                <div className='user-img' onClick={handleClick}><img src={me} alt="" /></div>
-            </div>
-            <div className='user-drop' style={{ display: isActive ? 'block' : 'none' }}>
-                <div className='user-menu'>
-                    <div>Profile</div>
-                    <div>Saved</div>
-                    <div>Setting</div>
-                    <div>Log Out</div>
-                </div>
-            </div>
 
-        </header>
-    )
+    if (user) console.log(user.result.fullName);
+
+    if (user) {
+        return (
+            < header className="app-header" >
+                <Link to='/'>
+                    <div className="header-logo">
+                        <h1>Instgram</h1>
+                    </div>
+                </Link>
+                <div className="header-search">
+                    <input type="text" placeholder="Search" />
+                </div>
+                <div className="header-nav">
+                    <Link to='/'><div><img src={home} alt="" /></div></Link>
+                    <Link to='/'><div><img src={messenger} alt="" /></div></Link>
+                    <AddPost title='Create new post' buttonTitle='Share' imgUrl='https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg' />
+                    <Link to='/'><div><img src={heart} alt="" /></div></Link>
+                    <div className='user-img' onClick={handleClick}><img src={user.result.userImg} alt="" /></div>
+                </div>
+                <div className='user-drop' style={{ display: isActive ? 'block' : 'none' }}>
+                    <div className='user-menu'>
+                        <div>Profile</div>
+                        <div>Saved</div>
+                        <div>Setting</div>
+                        <div onClick={logout}>Log Out</div>
+                    </div>
+                </div>
+
+            </header >
+
+        )
+    }
+    else return <></>
 }

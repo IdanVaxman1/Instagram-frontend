@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom'
-// import { PostDetails } from '../pages/post-details'
+import {  useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import heart from '../assets/heart.png'
 import chat from '../assets/chat.png'
 import send from '../assets/send.png'
 
 import { PostModal } from './post-modal'
+import { likePost } from '../store/post.actions';
 
 export const PostPreview = ({ post }) => {
 
     let nextState = {additionalInformation : 'Updated url'}
+    const dispatch = useDispatch()
 
 
     const onGoToDetails = () => {
@@ -33,12 +35,12 @@ export const PostPreview = ({ post }) => {
                 <img src={post.selectedImg} alt="" />
             </div>
             <div className='post-icons'>
-                <img src={heart} alt="" />
+                <img src={heart} alt="" onClick={() => dispatch(likePost(post._id , post))} />
                 <img src={send} alt="" />
                 <img src={chat} alt="" />
             </div>
             <div className='post-like'>
-                {/* <span>{post.likedBy.length} likes</span> */}
+                <span>{post.likeCount} likes</span>
             </div>
             <div className='post-txt'>
                 <span className='post-txt-name'>{post.by.fullname}</span>

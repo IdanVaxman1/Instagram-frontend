@@ -1,36 +1,51 @@
-
+import * as api from '../api/index'
 import { postService } from "../services/post-service";
-import axios from 'axios'
 
 
 
 
 
-export function loadPosts() {
-
+export const loadPosts = () => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get('http://localhost:3030/feed');
+            const { data } = await api.loadPosts()
             const posts = data
             dispatch({
                 type: 'SET_POSTS',
                 posts
             })
-        }   
+        }
         catch (err) {
             console.log('cannot set posts', err);
         }
-           
+
+    }
+
+}
+
+export const loadPost = (postId) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await api.loadPost(postId)
+            dispatch({
+                type: 'SET_POST',
+                data
+            })
+        }
+        catch (err) {
+            console.log('cannot set post', err);
+        }
+
     }
 
 }
 
 
-export function addPost(newPost) {
+export const addPost = (newPost) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post('/add' , newPost);
-            console.log('newpost:' , newPost);
+            const { data } = await api.addPost(newPost)
+            console.log('newpost:', newPost);
             dispatch({
                 type: 'ADD_POST',
                 newPost
@@ -41,65 +56,45 @@ export function addPost(newPost) {
     }
 }
 
-export function removePost(postId) {
-    return async (dispatch) => {
-        try {
-            await postService.remove(postId)
-            console.log('Deleted Succesfully!');
-            dispatch({
-                type: 'REMOVE_POST',
-                postId
-            })
-        } catch (err) {
-            console.log('Cannot remove post', err)
-        }
+export const deletePost = (postId) => async (dispatch) => {
+
+    try {
+        await api.deletePost(postId)
+        dispatch({ type: 'DELETE_POST', postId })
+        console.log('post deleted');
+    } catch (error) {
+        console.log(error);
     }
+
 }
 
-export function editPost(post) {
-    return async (dispatch) => {
-        try {
-            await postService.save(post)
-            console.log('edited Succesfully!');
-            dispatch({
-                type: 'EDIT_POST',
-                post
-            })
-        } catch (err) {
-            console.log('Cannot edit post', err)
-        }
+export const updatePost = (postId, post) => async (dispatch) => {
+
+    try {
+
+        const { data } = await api.updatePost(postId, post)
+        dispatch({ type: 'UPDATE_POST', postId , data })
+
+    } catch (error) {
+        console.log(error);
     }
+
+
 }
 
-export function getPost(postId) {
-    return (dispatch) => {
-        postService.getPost(postId)
-            .then(post => {
-                dispatch({
-                    type: 'SET_POST',
-                    post
-                })
-            })
-            .catch(err => {
-                console.log('Cannot load post', err)
-            })
+export const likePost = (postId, post) => async (dispatch) => {
+
+    try {
+        const { data } = await api.likePost(postId)
+        console.log('data ', post )
+        dispatch({ type: 'ADD_LIKE', postId , data })
+
+    } catch (error) {
+        console.log(error);
     }
+
 }
 
-export function addComment(postId, newComment) {
-    return async (dispatch) => {
-        try {
-            await postService.addComment(postId, newComment)
-            console.log('add Succesfully!');
-            dispatch({
-                type: 'SET_COMMENT',
-                postId,
-                newComment
-            })
-        } catch (err) {
-            console.log('Cannot add comment', err)
-        }
 
-    }
-}
+
 

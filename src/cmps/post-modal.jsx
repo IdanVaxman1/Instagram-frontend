@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { postService } from '../services/post-service'
-import { removePost } from '../store/post.actions';
+import { deletePost } from '../store/post.actions';
 import React from 'react';
 import Modal from 'react-modal';
 import more from '../assets/more.png'
@@ -47,10 +47,6 @@ export const PostModal = ({ post }) => {
     }
 
 
-    function remove() {
-        dispatch(removePost(post._id))
-        closeModal()
-    }
 
     return (
         <div>
@@ -65,7 +61,7 @@ export const PostModal = ({ post }) => {
             >
                 <div className='modal-buttons'>
                     <div className='modal-user-buttons'>
-                        <button onClick={remove}>Delete</button>
+                        <button onClick={() => dispatch(deletePost(post._id))}>Delete</button>
                     </div>
                     <button><AddPost postId={post._id} title='Edit' divTitle='Edit info' buttonTitle='Done' imgUrl={post.imgUrl}  /></button>
                     <button >Hide like count</button>

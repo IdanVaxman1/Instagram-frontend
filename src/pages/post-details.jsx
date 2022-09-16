@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import { getPost } from '../store/post.actions'
+import { loadPost } from '../store/post.actions'
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from 'react';
 import loading from '../assets/loading.gif'
@@ -15,7 +15,7 @@ export const PostDetails = () => {
 
 
     useEffect(() => {
-        dispatch(getPost(postId))
+        dispatch(loadPost(postId))
     }, [])
 
 
@@ -25,7 +25,7 @@ export const PostDetails = () => {
         <section className='post-details'>
             <div className='details-container'>
                 <div className='details-img'>
-                    <img src={post.imgUrl} alt="" />
+                    <img src={post.selectedImg} alt="" />
                 </div>
 
                 <div className='details-user'>
@@ -37,7 +37,7 @@ export const PostDetails = () => {
                     </div>
                 </div>
                 <div>
-                    {post.comments.map(comment => <DetailsComments comment={comment} />)}
+                    {/* {post.comments.map(comment => <DetailsComments comment={comment} />)} */}
                 </div>
             </div>
         </section>

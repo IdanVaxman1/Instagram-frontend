@@ -18,20 +18,21 @@ export function postReducer(state = initialState, action) {
             break
 
         case 'SET_POST':
-            newState = { ...state, posts : action.post }
+            newState = { ...state, posts : action.data }
             break
 
         case 'ADD_POST':
             newState = { ...state, posts: [action.newPost, ...state.posts] }
             break
 
-        case 'REMOVE_POST':
+        case 'DELETE_POST':
             posts = state.posts.filter(post => post._id !== action.postId)
             newState = { ...state, posts }
             break
 
-        case 'EDIT_POST':
-            posts = state.posts.map(post => (post._id === action.post._id) ? action.post : post)
+        case 'UPDATE_POST':
+        case 'ADD_LIKE':
+            posts = state.posts.map(post => (post._id === action.postId) ? action.data : post)
             newState = { ...state, posts }
             break
 

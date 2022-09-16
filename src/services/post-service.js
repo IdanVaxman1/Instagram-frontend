@@ -67,19 +67,9 @@ function _makeId(length = 5) {
 
 function getEmptyPost() {
     return {
-        // by: {
-        //     _id: 'u101',
-        //     fullname: "Tom Cohen",
-        //     imgUrl: "https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg"
-        // },
-        // imgUrl: "https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg",
-        // txt: '',
-        // likedBy: [],
-        // _id: _makeId()
-
-        txt : 'String',
-        by : {
-            fullname:'Idan vaxman',
+        txt: 'String',
+        by: {
+            fullname: 'Idan vaxman',
             imgUrl: 'https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg'
         },
         selectedImg: 'https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg',
