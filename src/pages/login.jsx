@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+
 
 import { signin, signup } from '../store/user.actions'
-
 import Input from '../cmps/input'
 
 
@@ -24,7 +24,7 @@ export const Login = () => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        (isSignUp) ? dispatch(signup(formData)) : dispatch(signin(formData , navigate))
+        (isSignUp) ? dispatch(signup(formData, navigate)) : dispatch(signin(formData, navigate))
     }
 
 

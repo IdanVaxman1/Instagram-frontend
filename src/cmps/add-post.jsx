@@ -45,6 +45,7 @@ export const AddPost = ({ postId, title, buttonTitle, imgUrl, divTitle }) => {
 
     const dispatch = useDispatch()
 
+    const user = JSON.parse(localStorage.getItem('user'))
 
     useEffect(() => {
         // dispatch(getPost(postId))
@@ -78,8 +79,8 @@ export const AddPost = ({ postId, title, buttonTitle, imgUrl, divTitle }) => {
         const post = postService.getEmptyPost()
         post.txt = newPost
         post.selectedImg = postImg
-        dispatch(addPost(post))
         console.log(post);
+        dispatch(addPost({ ...post, name: user?.result?.fullName }))
         closeModal()
     }
 
@@ -89,7 +90,7 @@ export const AddPost = ({ postId, title, buttonTitle, imgUrl, divTitle }) => {
         ev.preventDefault()
         const post = postService.getEmptyPost()
         post.txt = newPost
-        dispatch(updatePost(postId, post))
+        dispatch(updatePost(postId, { ...post, name: user?.result?.fullName }))
         console.log(post, 'newPost');
         closeModal()
     }
@@ -110,7 +111,7 @@ export const AddPost = ({ postId, title, buttonTitle, imgUrl, divTitle }) => {
                     <div className='add-post-header'>
                         <img onClick={closeModal} src={leftArrow} alt="" />
                         <span className='add-post-title'>{divTitle}</span>
-                        <span onClick={ () => dispatch(updatePost(postId, post))} className='add-post-share'>{buttonTitle}</span>
+                        <span onClick={() => dispatch(updatePost(postId, post))} className='add-post-share'>{buttonTitle}</span>
                     </div>
 
                     <div className='add-post-main'>
@@ -119,17 +120,13 @@ export const AddPost = ({ postId, title, buttonTitle, imgUrl, divTitle }) => {
                             <form onSubmit={(title === 'Edit') ? edit : add}>
                                 <textarea onChange={handleChange} name="" id="" cols="30" rows="10"></textarea>
                                 <button >Send</button>
-                            </form> 
+                            </form>
 
-                            {(postImg) ?
-                                <div className='add-post-img'>
-                                    <img src={postImg} alt="" />
-                                </div>
-                                :
-                                <FileBase64
-                                    multiple={false}
-                                    onDone={({ base64 }) => setPostImg(base64)} />
-                            }
+
+                            <FileBase64
+                                multiple={false}
+                                onDone={({ base64 }) => setPostImg(base64)} />
+
 
                         </div>
                     </div>

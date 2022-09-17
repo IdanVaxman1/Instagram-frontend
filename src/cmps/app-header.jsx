@@ -33,7 +33,6 @@ export const AppHeader = () => {
     }
 
 
-    if (user) console.log(user.result.fullName);
 
     if (user) {
         return (

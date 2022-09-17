@@ -30,10 +30,10 @@ export const PostDetails = () => {
 
                 <div className='details-user'>
                     <div>
-                        <img src={post.by.imgUrl} alt="" />
+                        <img src={post.selectedImg} alt="" />
                     </div>
                     <div className='details-fullname'>
-                        <Link to={`/profile/${post.by._id}`}><span>{post.by.fullname}</span></Link>
+                        <Link to={`/profile/${post.creator}`}><span>{post.name}</span></Link>
                     </div>
                 </div>
                 <div>

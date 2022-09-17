@@ -1,4 +1,5 @@
 import * as api from '../api/index'
+import { Navigate } from "react-router-dom";
 
 
 export const signin = (formData , navigate) => async (dispatch) => {
@@ -16,11 +17,12 @@ export const signin = (formData , navigate) => async (dispatch) => {
 
 }
 
-export const signup = (formData) => async (dispatch) => {
+export const signup = (formData , navigate) => async (dispatch) => {
 
     try {
         const { data } = await api.signUp(formData)
         dispatch({ type: 'AUTH', data })
+        navigate('/')
 
     } catch (error) {
         console.log(error);

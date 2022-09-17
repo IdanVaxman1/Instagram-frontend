@@ -12,21 +12,23 @@ export const PostPreview = ({ post }) => {
 
     let nextState = {additionalInformation : 'Updated url'}
     const dispatch = useDispatch()
-
+    const user = JSON.parse(localStorage.getItem('user'))
 
     const onGoToDetails = () => {
         window.history.replaceState(nextState , '' , `${post._id}`)
     }
+
+    console.log('post :::' , post);
 
     // (!post) && <h3>loading..</h3>
 
     return (
         <section className="post-preview">
             <div className="post-header">
-                <img src={post.by.imgUrl} alt="" />
-                <Link to={`/profile/${post.by._id}`}>
+                <img src={user.result.userImg} alt="" />
+                <Link to={`/profile/${post._id}`}>
                     <div className="post-name-header">
-                        <h4>{post.by.fullname}</h4>
+                        <h4>{post.name}</h4>
                     </div>
                 </Link>
                 <PostModal post={post} />
@@ -40,10 +42,10 @@ export const PostPreview = ({ post }) => {
                 <img src={chat} alt="" />
             </div>
             <div className='post-like'>
-                <span>{post.likeCount} likes</span>
+                <span>{post.likes.length} likes</span>
             </div>
             <div className='post-txt'>
-                <span className='post-txt-name'>{post.by.fullname}</span>
+                <span className='post-txt-name'>{post.fullname}</span>
                 <span>{post.txt}</span>
             </div>
 

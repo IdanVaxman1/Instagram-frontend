@@ -10,7 +10,6 @@ export const userReducer = (state = { userData: null }, action) => {
 
 
         case 'LOGUOT':
-            alert('Log Out')
             localStorage.clear()
             return { ...state, userData: null }
 

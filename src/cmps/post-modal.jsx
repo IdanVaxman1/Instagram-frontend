@@ -27,11 +27,14 @@ const customStyles = {
 export const PostModal = ({ post }) => {
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    
+
     const posts = useSelector((state) => state.postModule.posts)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     Modal.setAppElement('body');
+
+    const user = JSON.parse(localStorage.getItem('user'))
+
 
     function openModal() {
         setIsOpen(true);
@@ -60,12 +63,15 @@ export const PostModal = ({ post }) => {
                 contentLabel="Example Modal"
             >
                 <div className='modal-buttons'>
-                    <div className='modal-user-buttons'>
-                        <button onClick={() => dispatch(deletePost(post._id))}>Delete</button>
-                    </div>
-                    <button><AddPost postId={post._id} title='Edit' divTitle='Edit info' buttonTitle='Done' imgUrl={post.imgUrl}  /></button>
-                    <button >Hide like count</button>
-                    <button >Turn off commenting</button>
+                    {post.creator === user.result._id && (
+                        <div>
+                            <button onClick={() => dispatch(deletePost(post._id))}>Delete</button>
+                            <button><AddPost postId={post._id} title='Edit' divTitle='Edit info' buttonTitle='Done' imgUrl={post.imgUrl} /></button>
+                            <button >Hide like count</button>
+                            <button >Turn off commenting</button>
+                        </div>
+                    )
+                    }
                     <button onClick={onDetails}>Go to post</button>
                     <button >Copy link</button>
                     <button onClick={closeModal}>Cencel</button>

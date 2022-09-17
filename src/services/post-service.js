@@ -68,10 +68,7 @@ function _makeId(length = 5) {
 function getEmptyPost() {
     return {
         txt: 'String',
-        by: {
-            fullname: 'Idan vaxman',
-            imgUrl: 'https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg'
-        },
+        name: '',
         selectedImg: 'https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg',
     }
 }
