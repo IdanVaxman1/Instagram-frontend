@@ -71,7 +71,6 @@ export const deletePost = (postId) => async (dispatch) => {
 export const updatePost = (postId, post) => async (dispatch) => {
 
     try {
-
         const { data } = await api.updatePost(postId, post)
         dispatch({ type: 'UPDATE_POST', postId , data })
 
