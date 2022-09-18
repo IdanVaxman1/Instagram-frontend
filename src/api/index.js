@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL : 'http://localhost:3000'})
+const API = axios.create({ baseURL: 'http://localhost:3000' })
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('user')) {
@@ -21,3 +21,4 @@ export const likePost = (postId) => API.patch(`/${postId}/likepost`)
 
 export const signIn = (FormData) => API.post('/signin', FormData)
 export const signUp = (FormData) => API.post('/signup', FormData)
+export const updateUser = (userId, FormData) => API.patch(`/setting/${userId}`, FormData)

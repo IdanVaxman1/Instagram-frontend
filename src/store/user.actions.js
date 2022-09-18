@@ -2,9 +2,7 @@ import * as api from '../api/index'
 import { Navigate } from "react-router-dom";
 
 
-export const signin = (formData , navigate) => async (dispatch) => {
-    
-
+export const signin = (formData, navigate) => async (dispatch) => {
 
     try {
         const { data } = await api.signIn(formData)
@@ -17,12 +15,27 @@ export const signin = (formData , navigate) => async (dispatch) => {
 
 }
 
-export const signup = (formData , navigate) => async (dispatch) => {
+export const signup = (formData, navigate) => async (dispatch) => {
 
     try {
         const { data } = await api.signUp(formData)
         dispatch({ type: 'AUTH', data })
         navigate('/')
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+export const editProfile = (userId, formData) => async (dispatch) => {
+
+    try {
+
+        console.log(formData);
+        const { data } = await api.updateUser(userId, formData)
+        dispatch({ type: 'UPDATE_USER', data })
+
 
     } catch (error) {
         console.log(error);

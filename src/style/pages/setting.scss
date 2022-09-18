@@ -1,0 +1,33 @@
+.setting-container {
+
+    display: flex;
+    justify-content: center
+    
+
+}
+
+
+.settings {
+    width: 50%;
+    height: 500px;
+    border-radius: 3px;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    background-color:#ffffff ;
+    margin-top: 20px;
+    border: 1px solid rgb(219, 219, 219);
+    padding: 0;
+}
+
+.setting-options {
+    width: 20%;
+    height: 500px;
+    border-radius: 3px;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    background-color:#ffffff ;
+    margin-top: 20px;
+    border: 1px solid rgb(219, 219, 219);
+    border-right: none;
+    padding: 0;
+}
