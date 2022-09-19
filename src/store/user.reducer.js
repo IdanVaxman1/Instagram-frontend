@@ -17,6 +17,7 @@ export const userReducer = (state = { userData: null }, action) => {
             localStorage.setItem('user', JSON.stringify({ ...action?.data }))
             return {...state , userData : action.data}
 
+
         default:
             return state
     }

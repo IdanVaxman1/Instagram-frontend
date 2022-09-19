@@ -11,6 +11,8 @@ import IconButton from '@mui/material/IconButton';
 
 
 export const DropNav = ({ imgSrc }) => {
+
+    const user = JSON.parse(localStorage.getItem('user'))
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -57,7 +59,7 @@ export const DropNav = ({ imgSrc }) => {
                             content: '""',
                             display: 'block',
                             position: 'absolute',
-                            color : '#262626',
+                            color: '#262626',
                             top: 0,
                             right: 10,
                             width: 10,
@@ -69,21 +71,22 @@ export const DropNav = ({ imgSrc }) => {
                         },
                         'a': {
                             textDecoration: 0,
-                            color : '#262626'
+                            color: '#262626'
                         }
                     },
                 }}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem>
-                    <Avatar /> Profile
-                </MenuItem>
+                <Link to={`/profile/${user.result._id}`}>
+                    <MenuItem>
+                        <Avatar /> Profile
+                    </MenuItem>
+                </Link>
                 <MenuItem>
                     <Avatar /> My account
                 </MenuItem>
                 <Divider />
-
                 <Link to='/setting'>
                     <MenuItem>
                         <ListItemIcon>

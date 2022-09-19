@@ -19,7 +19,7 @@ export const PostDetails = () => {
     }, [])
 
 
-    if (!post.txt) return <div className='loading'><img src={loading} alt="" /></div>
+    if (!post) return <div className='loading'><img src={loading} alt="" /></div>
 
     return (
         <section className='post-details'>

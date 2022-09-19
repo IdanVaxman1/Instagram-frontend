@@ -1,5 +1,4 @@
 import * as api from '../api/index'
-import { Navigate } from "react-router-dom";
 
 
 export const signin = (formData, navigate) => async (dispatch) => {
@@ -42,3 +41,4 @@ export const editProfile = (userId, formData) => async (dispatch) => {
     }
 
 }
+
