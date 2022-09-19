@@ -11,21 +11,19 @@ import { FeedStory } from '../cmps/feed-story'
 export const Feed = () => {
 
     const posts = useSelector((state) => state.postModule.posts)
-    const [user, setUser] = useState()
-
+    const user = JSON.parse(localStorage.getItem('user'))
     const dispatch = useDispatch()
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('user')))
         dispatch(loadPosts())
     }, [])
 
 
 
-    
+
     if (!Array.isArray(posts) || !posts.length) return <div className='loading'><img src={loading} alt="" /></div>
     if (!user) return <Navigate replace to="/login" />
-
+    
     return (
         <section>
             <FeedStory />

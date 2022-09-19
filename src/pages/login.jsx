@@ -14,7 +14,7 @@ export const Login = () => {
     const navigate = useNavigate()
 
     const initialState = { email: '', fullName: '', password: '' }
-
+    const user = JSON.parse(localStorage.getItem('user'))
     const [isSignUp, setisSignUp] = useState(false)
     const [formData, setformData] = useState(initialState)
 
@@ -26,6 +26,8 @@ export const Login = () => {
         ev.preventDefault();
         (isSignUp) ? dispatch(signup(formData, navigate)) : dispatch(signin(formData, navigate))
     }
+
+    console.log(user);
 
 
     return (

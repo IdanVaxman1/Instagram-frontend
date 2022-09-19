@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { AddPost } from './add-post'
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
-
+import { DropNav } from './drop-nav'
 import { Link } from 'react-router-dom'
 import home from '../assets/icons/home.png'
 import messenger from '../assets/icons/messenger.png'
@@ -50,13 +50,13 @@ export const AppHeader = () => {
                     <Link to='/'><div><img src={messenger} alt="" /></div></Link>
                     <AddPost title='Create new post' buttonTitle='Share' imgUrl='https://res.cloudinary.com/demo/image/upload/e_sepia:50/coast.jpg' />
                     <Link to='/'><div><img src={heart} alt="" /></div></Link>
-                    <div className='user-img' onClick={handleClick}><img src={user.result.userImg} alt="" /></div>
+                    <DropNav imgSrc={user.result.userImg} />
                 </div>
                 <div className='user-drop' style={{ display: isActive ? 'block' : 'none' }}>
                     <div className='user-menu'>
                         <div>Profile</div>
                         <div>Saved</div>
-                        <div>Setting</div>
+                        <Link to='/setting'><div>Setting</div></Link>
                         <div onClick={logout}>Log Out</div>
                     </div>
                 </div>
