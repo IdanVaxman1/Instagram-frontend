@@ -42,3 +42,15 @@ export const editProfile = (userId, formData) => async (dispatch) => {
 
 }
 
+export const following = (userId , profileId) => async (dispatch) => {
+
+    try {
+        const { data } = await api.following(profileId , userId)
+        dispatch({ type: 'UPDATE_USER', data })
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+

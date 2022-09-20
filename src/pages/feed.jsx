@@ -21,8 +21,8 @@ export const Feed = () => {
 
 
 
-    if (!Array.isArray(posts) || !posts.length) return <div className='loading'><img src={loading} alt="" /></div>
     if (!user) return <Navigate replace to="/login" />
+    if (!Array.isArray(posts) || !posts.length) return <div className='loading'><img src={loading} alt="" /></div>
     
     return (
         <section>

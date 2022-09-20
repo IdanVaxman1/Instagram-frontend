@@ -74,7 +74,7 @@ export const PostModal = ({ post }) => {
                     }
                     <button onClick={onDetails}>Go to post</button>
                     <button >Copy link</button>
-                    <button onClick={closeModal}>Cencel</button>
+                    <button onClick={closeModal}>Cancel</button>
                 </div>
             </Modal>
         </div>

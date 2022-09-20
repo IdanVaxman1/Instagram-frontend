@@ -1,22 +1,22 @@
 .post-profile-preview {
-    
+
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     margin-top: 100px;
     margin-left: 120px;
-    width: 293px;
+    gap: 10px;
+    
 
     img {
-        
         cursor: pointer;
         height: 293px;
-        width: 100%;
+        width: 293px;
     }
-    
+
     :hover {
         // opacity: 60%;
-        background: url('~/src/assets/chat.png') no-repeat  center;
-        background: rgb(0, 0, 0,0.3);
+        background: url('~/src/assets/chat.png') no-repeat center;
+        background: rgb(0, 0, 0, 0.3);
         background-size: 25px 25px;
 
     }

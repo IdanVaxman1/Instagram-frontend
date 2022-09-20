@@ -50,7 +50,7 @@ export const PostPreview = ({ post }) => {
                 <span>{post.likes.length} likes</span>
             </div>
             <div className='post-txt'>
-                <span className='post-txt-name'>{post.fullname}</span>
+                <span className='post-txt-name'>{post.name}</span>
                 <span>{post.txt}</span>
             </div>
 

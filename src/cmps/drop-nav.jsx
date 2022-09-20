@@ -7,6 +7,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,6 +16,11 @@ export const DropNav = ({ imgSrc }) => {
 
     const user = JSON.parse(localStorage.getItem('user'))
     const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -21,6 +28,13 @@ export const DropNav = ({ imgSrc }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+
+    const logout = () => {
+        dispatch({ type: 'LOGUOT' })
+        navigate('/login')
+    }
+
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -94,7 +108,7 @@ export const DropNav = ({ imgSrc }) => {
                         Settings
                     </MenuItem>
                 </Link>
-                <MenuItem>
+                <MenuItem onClick={logout}>
                     <ListItemIcon>
                     </ListItemIcon>
                     Logout
