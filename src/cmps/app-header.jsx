@@ -14,12 +14,14 @@ import me from '../assets/me.jpg'
 export const AppHeader = () => {
 
     const [isActive, setIsActive] = useState(false);
-    const [user, setUser] = useState()
+    // const [user, setUser] = useState()
+    const user = JSON.parse(localStorage.getItem('user'))
     const navigate = useNavigate()
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('user')))
     }, [])
+
+    console.log(user);
 
 
     const dispatch = useDispatch()
@@ -31,6 +33,7 @@ export const AppHeader = () => {
         dispatch({ type: 'LOGUOT' })
         navigate('/login')
     }
+
 
 
 
@@ -65,5 +68,5 @@ export const AppHeader = () => {
 
         )
     }
-    else return <></>
+    else return <div></div>
 }

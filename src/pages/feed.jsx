@@ -16,7 +16,7 @@ export const Feed = () => {
 
     useEffect(() => {
         dispatch(loadPosts())
-    }, [])
+    }, [posts])
 
 
 

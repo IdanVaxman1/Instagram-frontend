@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import { loadPost } from '../store/post.actions'
 import { useDispatch, useSelector } from "react-redux"
+import { loadPost } from '../store/post.actions'
+import { getUserPosts } from '../store/profile.actions'
 import { useEffect, useState } from 'react';
 import loading from '../assets/loading.gif'
 import { DetailsComments } from '../cmps/details-comment'
@@ -10,6 +11,7 @@ import { DetailsComments } from '../cmps/details-comment'
 export const PostDetails = () => {
 
     const post = useSelector((state) => state.postModule.posts)
+    const posts = useSelector((state) => state.profileModule.userPosts)
     const dispatch = useDispatch()
     const { postId } = useParams()
 
@@ -17,6 +19,7 @@ export const PostDetails = () => {
     useEffect(() => {
         dispatch(loadPost(postId))
     }, [])
+
 
 
     if (!post) return <div className='loading'><img src={loading} alt="" /></div>
@@ -40,7 +43,17 @@ export const PostDetails = () => {
                     {/* {post.comments.map(comment => <DetailsComments comment={comment} />)} */}
                 </div>
             </div>
+
+
+            <section>
+
+            </section>
+
+
         </section>
+
+
+
     )
 
 }

@@ -33,23 +33,44 @@ export const UserProfile = () => {
     console.log(userProfile.following.length);
 
     return (
-        <section>
+        <section className='profile-container'>
             <section className='profile-header'>
                 <div className='profile-user-img'>
                     <img src={userProfile.userImg} alt="" />
                 </div>
-                <div className='profile-username'>
-                    <span>{userProfile.fullName}</span>
-                    {user.result._id !== userProfile._id && <button onClick={onFollowing}>Follow</button>}
-                </div>
+                <section className='profile-main'>
+                    <div className='profile' >
+                        <div className='profile-username'>
+                            <span>{userProfile.fullName}</span>
+                        </div>
+                        <div className='message-btn'>
+                            {user.result._id !== userProfile._id && <button>Message</button>}
+                        </div>
+                        <div className='follow-btn'>
+                            {user.result._id !== userProfile._id && <button onClick={onFollowing}>Follow</button>}
+                        </div>
+                    </div>
 
-                <section className='user-details'>
-                    <div>{posts.length} posts</div>
-                    <div>{userProfile.followers.length} followers </div>
-                    <div>{userProfile.following.length} following</div>
+                    <section className='user-details'>
+                        <div><span className='profile-num'>{posts.length}</span> posts</div>
+                        <div><span className='profile-num'>{userProfile.followers.length}</span> followers </div>
+                        <div><span className='profile-num'>{userProfile.following.length}</span> following</div>
+                    </section>
+
+                    <div className='profile-bio'>
+                        <span>{user.result.userBio}</span>
+                    </div>
+
                 </section>
             </section>
 
+            <div className='tablist'>
+                <div className='tablist-op'>
+                    <div>POSTS</div>
+                    <div>SAVED</div>
+                    <div>TAGGED</div>
+                </div>
+            </div>
             <section className="post-profile-preview">
                 {posts.map(post => <PostProfile post={post} />)}
             </section>

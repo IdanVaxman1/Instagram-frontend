@@ -28,7 +28,6 @@ export const PostPreview = ({ post }) => {
 
 
     // (!post) && <h3>loading..</h3>
-    console.log(user.result.userImg);
     return (
         <section className="post-preview">
             <div className="post-header">
