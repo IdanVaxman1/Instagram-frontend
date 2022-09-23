@@ -18,7 +18,7 @@ export function postReducer(state = initialState, action) {
             break
 
         case 'SET_POST':
-            newState = { ...state, posts : action.data }
+            newState = { ...state, posts: action.data }
             break
 
         case 'ADD_POST':
@@ -32,6 +32,7 @@ export function postReducer(state = initialState, action) {
 
         case 'UPDATE_POST':
         case 'ADD_LIKE':
+        case 'COMMENT_POST':
             posts = state.posts.map(post => (post._id === action.postId) ? action.data : post)
             newState = { ...state, posts }
             break

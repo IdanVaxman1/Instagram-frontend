@@ -4,10 +4,10 @@ export const DetailsComments = ({ comment }) => {
     return (
         <div className="ditails-comment">
             <div>
-                <img src={avatar} alt="" />
+                <img src={comment.userImg} alt="" />
             </div>
             <div>
-                <span className="comment-fullname">{comment.by.fullname}</span>
+                <span className="comment-fullname">{comment.fullName}</span>
                 <span> {comment.txt}</span>
             </div>
         </div>

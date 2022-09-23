@@ -72,7 +72,7 @@ export const updatePost = (postId, post) => async (dispatch) => {
 
     try {
         const { data } = await api.updatePost(postId, post)
-        dispatch({ type: 'UPDATE_POST', postId , data })
+        dispatch({ type: 'UPDATE_POST', postId, data })
 
     } catch (error) {
         console.log(error);
@@ -85,8 +85,20 @@ export const likePost = (postId, post) => async (dispatch) => {
 
     try {
         const { data } = await api.likePost(postId)
-        console.log('data ', post )
-        dispatch({ type: 'ADD_LIKE', postId , data })
+        console.log('data ', post)
+        dispatch({ type: 'ADD_LIKE', postId, data })
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+export const commentPost = (postId, commentData) => async (dispatch) => {
+
+    try {
+        const { data } = await api.commentPost(postId, commentData)
+        dispatch({ type: 'COMMENT_POST', postId, data })
 
     } catch (error) {
         console.log(error);

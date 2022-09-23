@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import heart from '../assets/heart.png'
+import likeheart from '../assets/likeheart.png'
 import chat from '../assets/chat.png'
 import send from '../assets/send.png'
-
+import moment from 'moment/moment';
 
 import { PostModal } from './post-modal'
-import { likePost } from '../store/post.actions';
+import { likePost, commentPost } from '../store/post.actions';
 
 export const PostPreview = ({ post }) => {
 
@@ -17,33 +19,49 @@ export const PostPreview = ({ post }) => {
     const dispatch = useDispatch()
     const user = JSON.parse(localStorage.getItem('user'))
 
+    const [commentData, setcommentData] = useState()
+
+
     const onGoToDetails = () => {
-        window.history.replaceState(nextState, '', `${post._id}`)
+        navigate(`/p/${post._id}`)
     }
 
     const onGoToProfile = () => {
         navigate(`/profile/${post.creator}`)
     }
 
+    const handleChange = (ev) => {
+        if (ev.target.value) {
+            setcommentData({ userImg: user.result.userImg, fullName: user.result.fullName, txt: ev.target.value })
+        }
+        else setcommentData()
+    }
 
+    const handleSubmit = (ev) => {
+        ev.preventDefault()
+        dispatch(commentPost(post._id, commentData))
+    }
 
     // (!post) && <h3>loading..</h3>
     return (
         <section className="post-preview">
             <div className="post-header">
                 <img src={user.result.userImg} alt="" />
-                    <div onClick={onGoToProfile} className="post-name-header">
-                        <h4>{post.name}</h4>
-                    </div>
-                <PostModal post={post} />
+                <div onClick={onGoToProfile} className="post-name-header">
+                    <h4>{post.name}</h4>
+                </div>
+                <div className='post-more'>
+                    <PostModal post={post} />
+                </div>
             </div>
             <div className="post-img">
                 <img src={post.selectedImg} alt="" />
             </div>
             <div className='post-icons'>
-                <img src={heart} alt="" onClick={() => dispatch(likePost(post._id, post))} />
-                <img src={send} alt="" />
+                <img src={post.likes.find((like) => like === user.result._id) ? likeheart : heart}
+                    alt="" onClick={() => dispatch(likePost(post._id, post))} />
                 <img src={chat} alt="" />
+                <img src={send} alt="" />
             </div>
             <div className='post-like'>
                 <span>{post.likes.length} likes</span>
@@ -53,9 +71,21 @@ export const PostPreview = ({ post }) => {
                 <span>{post.txt}</span>
             </div>
 
+
             <div className='post-comments' onClick={onGoToDetails}>
+                <span>{`View all ${post.comments.length} comments`}</span>
                 {/* <PostDetails post={post} simbol={'...'}/> */}
             </div>
-        </section>
+
+            <div className='post-date'>
+                <span>{moment.utc(post.createdAt).local().startOf('seconds').fromNow()}</span>
+            </div>
+
+            <div className='post-comment'>
+                <div><textarea onChange={handleChange} placeholder='Add a comment...' cols="55" rows="1"></textarea></div>
+                <div><button onClick={handleSubmit} disabled={!commentData}>Post</button></div>
+            </div>
+
+        </section >
     )
 }

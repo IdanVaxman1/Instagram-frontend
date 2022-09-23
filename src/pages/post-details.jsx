@@ -1,11 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { loadPost } from '../store/post.actions'
+import { loadPost, commentPost } from '../store/post.actions'
 import { getUserPosts } from '../store/profile.actions'
 import { useEffect, useState } from 'react';
 import loading from '../assets/loading.gif'
+
 import { DetailsComments } from '../cmps/details-comment'
+import Input from '../cmps/input';
 
 
 export const PostDetails = () => {
@@ -14,6 +16,9 @@ export const PostDetails = () => {
     const posts = useSelector((state) => state.profileModule.userPosts)
     const dispatch = useDispatch()
     const { postId } = useParams()
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    const [commentData, setcommentData] = useState(post.comments)
 
 
     useEffect(() => {
@@ -21,6 +26,14 @@ export const PostDetails = () => {
     }, [])
 
 
+    const handleChange = (ev) => {
+        setcommentData({ userImg: user.result.userImg, fullName: user.result.fullName, txt: ev.target.value })
+    }
+
+    const handleSubmit = (ev) => {
+        ev.preventDefault()
+        dispatch(commentPost(post._id, commentData))
+    }
 
     if (!post) return <div className='loading'><img src={loading} alt="" /></div>
 
@@ -40,8 +53,13 @@ export const PostDetails = () => {
                     </div>
                 </div>
                 <div>
-                    {/* {post.comments.map(comment => <DetailsComments comment={comment} />)} */}
+
+                    {post.comments && post.comments.map(comment => <DetailsComments comment={comment} />)}
                 </div>
+                <form onSubmit={handleSubmit}>
+                    <Input type={'text'} handleChange={handleChange} name={'comment'} />
+                    <button>Post</button>
+                </form>
             </div>
 
 

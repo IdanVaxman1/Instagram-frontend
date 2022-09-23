@@ -3,22 +3,27 @@
     // height: 600px;
     border: 1px solid rgb(219, 219, 219);
     border-radius: 10px;
+    margin-top: 10px;
+    background-color: #ffffff;
+
     margin: auto;
-    margin-top: 20px ;
-    margin-bottom: 20px ;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .post-header {
     display: flex;
-    padding: 10px;
-    background-color:#ffffff ;
+    padding: 5px;
+    background-color: #ffffff;
     border-radius: 10px;
-    
+
     .post-name-header {
-        margin: 15px;
+        margin: 10px;
+        margin-top: 12px;
+        font-size: 14px;
         cursor: pointer;
     }
-    
+
     img {
         width: 40px;
         height: 40px;
@@ -32,44 +37,55 @@
     }
 }
 
+.post-more {
+    
+}
+
 .post-img {
 
-    img{
+    img {
         width: 100%;
         height: 450px;
 
     }
 }
 
+
+
+
 .post-icons {
 
-        padding-left: 15px;
-        margin-top: 10px;
+    padding-left: 15px;
+    margin-top: 10px;
 
-        img{
-            width: 25px;
-            height: 25px;
-            margin-right: 10px;
-            cursor: pointer;
-        }   
+    img {
+        width: 25px;
+        height: 25px;
+        margin-right: 18px;
+        cursor: pointer;
+    }
 }
 
 .post-like {
     margin-top: 10px;
     margin-left: 15px;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .post-txt {
     display: flex;
     margin-top: 10px;
     margin-left: 15px;
+    font-size: 14px;
     gap: 10px;
 
 
 
     .post-txt-name {
         font-weight: 700;
+        font-size: 14px;
+
     }
 }
 
@@ -79,4 +95,58 @@
     margin-left: 15px;
     font-size: 15px;
     cursor: pointer;
+}
+
+.post-date {
+    color: #919aa4;
+    margin-left: 15px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.post-comment {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-top: 1px solid rgb(239, 239, 239);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    textarea {
+        resize: none;
+        border: none;
+        background-color: #ffffff;
+        // height: 30px;
+        margin-left: 50px;
+        width: 85%;
+        overflow: hidden
+    }
+
+    textarea:focus,
+    input:focus {
+        outline: 0;
+    }
+
+    ::placeholder {
+        font-size: 17px;
+        color: rgb(142, 142, 142);
+    }
+
+    button {
+        color: rgb(54, 171, 248);
+        border: none;
+        background-color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    
+        button:disabled,
+        button[disabled] {
+            opacity: 0.3;
+            cursor:auto;
+        }
 }
