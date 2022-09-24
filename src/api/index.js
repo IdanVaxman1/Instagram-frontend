@@ -12,6 +12,7 @@ API.interceptors.request.use((req) => {
 
 
 export const loadPosts = () => API.get('/feed')
+export const loadPostsByIds = (userId) => API.get(`/savedpost/${userId}`)
 export const loadPost = (postId) => API.get(`/feed/${postId}`)
 export const addPost = (newPost) => API.post('/add', newPost)
 export const deletePost = (id) => API.delete(`/${id}`)
@@ -26,3 +27,4 @@ export const updateUser = (userId, FormData) => API.patch(`/setting/${userId}`, 
 export const getUser = (userId) => API.get(`/user/${userId}`)
 export const getUserPosts = (userId) => API.get(`/userPost/${userId}`)
 export const following = (userId, profileId) => API.patch(`/following/${userId}`, { profileId })
+export const savePost = (userId, postId) => API.patch(`/savepost/${userId}`, { postId })

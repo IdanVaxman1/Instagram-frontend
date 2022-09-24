@@ -42,10 +42,22 @@ export const editProfile = (userId, formData) => async (dispatch) => {
 
 }
 
-export const following = (userId , profileId) => async (dispatch) => {
+export const following = (userId, profileId) => async (dispatch) => {
 
     try {
-        const { data } = await api.following(profileId , userId)
+        const { data } = await api.following(profileId, userId)
+        dispatch({ type: 'UPDATE_USER', data })
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+export const savePost = (userId, postId) => async (dispatch) => {
+
+    try {
+        const { data } = await api.savePost(userId, postId)
         dispatch({ type: 'UPDATE_USER', data })
 
     } catch (error) {

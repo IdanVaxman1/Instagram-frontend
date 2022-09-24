@@ -7,9 +7,12 @@ import likeheart from '../assets/likeheart.png'
 import chat from '../assets/chat.png'
 import send from '../assets/send.png'
 import moment from 'moment/moment';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 import { PostModal } from './post-modal'
 import { likePost, commentPost } from '../store/post.actions';
+import { savePost } from '../store/user.actions'
 
 export const PostPreview = ({ post }) => {
 
@@ -20,6 +23,7 @@ export const PostPreview = ({ post }) => {
     const user = JSON.parse(localStorage.getItem('user'))
 
     const [commentData, setcommentData] = useState()
+    const [postSaved, setpostSaved] = useState(false)
 
 
     const onGoToDetails = () => {
@@ -42,6 +46,12 @@ export const PostPreview = ({ post }) => {
         dispatch(commentPost(post._id, commentData))
     }
 
+    const onSavePost = () => {
+        dispatch(savePost(user.result._id, post._id))
+        setpostSaved(true)
+    }
+
+
     // (!post) && <h3>loading..</h3>
     return (
         <section className="post-preview">
@@ -62,6 +72,8 @@ export const PostPreview = ({ post }) => {
                     alt="" onClick={() => dispatch(likePost(post._id, post))} />
                 <img src={chat} alt="" />
                 <img src={send} alt="" />
+                {user.result.SavedPosts.find((postId) => postId === post._id) || postSaved ? <BookmarkIcon /> : <BookmarkBorderIcon onClick={onSavePost} />}
+
             </div>
             <div className='post-like'>
                 <span>{post.likes.length} likes</span>

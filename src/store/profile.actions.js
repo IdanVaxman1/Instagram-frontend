@@ -26,3 +26,21 @@ export const getUserPosts = (userId) => async (dispatch) => {
     }
 
 }
+
+export const loadPostsByIds = (userId) => {
+
+    return async (dispatch) => {
+        try {
+            const { data } = await api.loadPostsByIds(userId)
+            dispatch({
+                type: 'SET_POSTS',
+                data
+            })
+        }
+        catch (err) {
+            console.log('cannot set posts', err);
+        }
+
+    }
+
+}

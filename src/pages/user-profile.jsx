@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { postService } from '../services/post-service'
 import { userService } from '../services/user-service'
 import { PostProfile } from '../cmps/post-profile'
-import { getUser, getUserPosts } from '../store/profile.actions'
+import { getUser, getUserPosts, loadPostsByIds } from '../store/profile.actions'
 import { following } from '../store/user.actions'
 import loading from '../assets/loading.gif'
 import { useSelector, useDispatch } from 'react-redux'
@@ -20,7 +20,6 @@ export const UserProfile = () => {
 
     useEffect(() => {
         dispatch(getUser(userId))
-        dispatch(getUserPosts(userId))
     }, [userId])
 
 
@@ -66,8 +65,8 @@ export const UserProfile = () => {
 
             <div className='tablist'>
                 <div className='tablist-op'>
-                    <div>POSTS</div>
-                    <div>SAVED</div>
+                    <div onClick={() => dispatch(getUserPosts(userId))}>POSTS</div>
+                    <div onClick={() => dispatch(loadPostsByIds(userId))}>SAVED</div>
                     <div>TAGGED</div>
                 </div>
             </div>

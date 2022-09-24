@@ -23,6 +23,9 @@ export const loadPosts = () => {
 
 }
 
+
+
+
 export const loadPost = (postId) => {
     return async (dispatch) => {
         try {
