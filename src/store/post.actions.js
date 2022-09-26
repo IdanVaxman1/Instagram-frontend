@@ -3,8 +3,6 @@ import { postService } from "../services/post-service";
 
 
 
-
-
 export const loadPosts = () => {
     return async (dispatch) => {
         try {
